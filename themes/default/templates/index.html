@@ -11,6 +11,11 @@
     <meta name="keywords" content="{{ .blog.Keywords }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../static/css/style.css">
+    
+    <!-- 引入vue -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+	<!-- 引入http-vue-loader -->
+    <script src="https://unpkg.com/http-vue-loader"></script>
 </head>
 
 <body>
@@ -25,14 +30,11 @@
             <div class="fg"></div>
         </div>
         <div class="meBox-text">
-            <p>大道至简, 故不繁</p>
-            <p>知行合一, 故不辍</p>
-            <p>守正出奇, 故不忧</p>
-            <p>道生一，一生二，二生三，三生万物</p>
+            <p>程序从来都不是完美的，但请对那些追求完美的程序员（自己）保持着敬畏。</p>
         </div>
         <!-- 两个按钮 -->
         <div class="meBox-Button">
-            <a href="https://github.com/lllwan" target="_blank"><i class="bi-github" role="img" aria-label="GitHub"></i></a>
+            <a href="https://github.com/Thecosy" target="_blank"><i class="bi-github" role="img" aria-label="GitHub"></i></a>
         </div>
     </div>
 
@@ -48,28 +50,28 @@
             </div>
             <!-- 顶部标题 -->
             <div class="title">
-                <span>wangxun - bash</span>
+                <span>Linux - bash</span>
             </div>
             <!-- 终端内文字 -->
             <div class="cmdText">
-<!--                <span style="color: rgb(0, 190, 0);">root@wangxun</span>-->
+<!--                <span style="color: rgb(0, 190, 0);">root@Linux</span>-->
 <!--                <span style="color: blue;">~</span>-->
 <!--                <span style="color: rgb(39, 39, 39);">./tianqi.sh</span>-->
 <!--                <br />-->
 <!--                <iframe scrolling="no" src="https://tianqiapi.com/api.php?style=tc&skin=pitaya" frameborder="0"-->
 <!--                        width="350" height="24" allowtransparency="true"></iframe>-->
 <!--                <br />-->
-                <span style="color: rgb(0, 190, 0);">root@wangxun</span>
+                <span style="color: rgb(0, 190, 0);">root@Linux</span>
                 <span style="color: blue;">~</span>
                 <span style="color: rgb(39, 39, 39);">cat /me.txt</span>
                 <ul style="margin-left: 15px">
-                    <li>运维 and Python/Golang 开发程序猿一枚，自封运维架构师</li>
-                    <li>略懂前端，靠前端框架撑门面的伪全栈</li>
+                    <li>Java and Python/Golang 开发程序猿一枚</li>
+                    <li>略懂前端，伪全栈</li>
                     <li>热衷于折腾kubernetes、云原生、service mesh、网络、存储等脱发技术</li>
                     <li>资深电子垃圾堆建设者，热爱树莓派、各种矿渣和传感器, 智能家居的业余玩家</li>
-                    <li>运维劝退师，背锅10年，仍愿永不宕机，世界和平</li>
+                    <li>编程劝退师，背锅10年，仍愿永不宕机，世界和平</li>
                 </ul>
-                <span style="color: rgb(0, 190, 0);">root@wangxun</span>
+                <span style="color: rgb(0, 190, 0);">root@Linux</span>
                 <span style="color: blue;">~</span>
             </div>
         </div>
@@ -87,7 +89,7 @@
             </div>
             <!-- 终端内文字 -->
             <div class="cmdText">
-                <span style="color: rgb(0, 190, 0);">root@wangxun</span>
+                <span style="color: rgb(0, 190, 0);">root@Linux</span>
                 <span style="color: blue;">~</span>
                 <span style="color: rgb(39, 39, 39);">./docs.sh</span>
                 <ul class="ul">
@@ -95,7 +97,7 @@
                     <li><a href="/DocList/{{ $v.Repo }}">{{ $v.Name }}</a></li>
                     {{end}}
                 </ul>
-                <span style="color: rgb(0, 190, 0);">root@wangxun</span>
+                <span style="color: rgb(0, 190, 0);">root@Linux</span>
                 <span style="color: blue;">~</span>
                 <span style="color: rgb(39, 39, 39);">./links.sh</span>
                 <ul class="ul">
@@ -103,13 +105,100 @@
                     <li><a href="{{ $v.Link }}" target="_blank">{{ $v.Name }}</a></li>
                     {{end}}
                 </ul>
-                <span style="color: rgb(0, 190, 0);">root@wangxun</span>
-                <span style="color: blue;">~</span>
+                <span style="color: rgb(0, 190, 0);">root@Linux</span>
+                    <span style="color: blue;">~</span>
+                    <span style="color: rgb(39, 39, 39);">
+                        <input id="inputId"   @keyup.enter="nextCode(temp)" v-model="temp.input" type=text style="border-style:none;outline:none;font-size: 14px;background-color:rgba(0,0,0,0);">
+                    </span>
+                <div  v-for="(item,index) in createNumber" :key="index">
+<!--                    <span style="color: rgb(0, 190, 0);">root@Linux</span>-->
+<!--                    <span style="color: blue;">~</span>-->
+                    <span v-text="item.text" style="color: rgb(39, 39, 39);">
+                        
+                    </span>
+                    <ul class="ul">
+                      
+                    </ul>
+                    <!-- ------ -->
+                    <span style="color: rgb(0, 190, 0);">root@Linux</span>
+                    <span style="color: blue;">~</span>
+                    <span style="color: rgb(39, 39, 39);">
+                        <input :ref="'input'+ item.id " @keyup.enter="nextCode(item)" v-model="item.input" type=text style="border-style:none;outline:none;font-size: 14px;background-color:rgba(0,0,0,0); ">
+                    </span>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    Vue.use(httpVueLoader)  
+    new Vue({
+        el: '#box',  
+        data: {  
+            temp: {
+                id: 0,
+                default: 0,
+                text: "",
+                input: ""
+            },
+            // createNumber: [{
+            //     id: 0,
+            //     default: 0,
+            //     text: "",
+            //     input: ""
+            // }],
+            createNumber: [],
+        },  
+        created() {
+        },
+        mounted () { 
+            document.getElementById('inputId').focus()
+        },
+        methods: {
+            nextCode(item) {
+                if(item.input === "ls"){
+                    this.createNumber.push({
+                        id: item.id + 1,
+                        default: 0,
+                        text: "Desktop\t\t\t\tcache\n" +
+                            "Documents\t\t\n" +
+                            "Downloads\t\t\n" +
+                            "Library\t\t\t\n"
 
+                    })
+                }else if(item.input === "pwd"){
+                    this.createNumber.push({
+                        id: item.id + 1,
+                        default: 0,
+                        text: "/root/home"
+                    })
+                }else if(item.input === "help"){
+                    this.createNumber.push({
+                        id: item.id + 1,
+                        default: 0,
+                        text: "cd\t\t\t\tls\t\t\t\tpwd"
+                    })
+                }else if(item.input == "" || item.input == undefined){
+                    this.createNumber.push({
+                        id: item.id + 1,
+                        default: 0,
+                        text: "Please do not enter a blank line"
+                    })
+                }
+                else{
+                this.createNumber.push({
+                    id: item.id + 1,
+                    default: 0,
+                    text: "zsh: command not found:" + item.input
+                })}
+                //延时执行刷新移动到下一个input操作
+                setTimeout(() => {
+                    this.$refs['input'+(item.id + 1)][0].focus();
+                }, 5);
+            }
+        },
+    })
+</script>
 <!-- 页脚 -->
 <!--<div id="footer">-->
 <!--    {{template "footer.html"}}-->

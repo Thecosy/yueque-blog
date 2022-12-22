@@ -1,0 +1,36 @@
+---
+yuque:
+  api: "https://www.yuque.com/api/v2"
+  token: "MM0RepyhoVYXb2uMzlQ0gT2gdaLmLPfJyDAl2S6g"
+  user: "xiajinliangan-nbyuc"
+  repos:
+    - name: "前端"
+      repo: "ysgggb"   
+    - name: "后端"
+      repo: "ecou0s"   
+    - name: "计算机"
+      repo: "nkep45"   
+    - name: "Linux"
+      repo: "cwb37r"   
+blog:
+  title: "Thecosy"
+  subtitle: "大道至简"
+  keywords: "页面keywords"
+  avatar: "https://img2.baidu.com/it/u=2015865969,3401990894&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1671642000&t=5ec3f0711e9d16b2c698d8df10092bf0"
+  description: "页面description"
+  author: "Thecosy"
+  # 友情链接
+  links:
+      - name: "google"
+        link: "https://www.google.com"
+  vssue:
+    owner: "lllwan"
+    repo: "blog"
+    clientId: "xxxxx"
+    clientSecret: "xxxxx"
+
+manage:
+  autoSSL: false
+  httpPort: 9532
+  httpsPort: 443
+  theme: default

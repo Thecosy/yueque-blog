@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+	"time"
 	"unicode/utf8"
 
 	"github.com/gin-gonic/gin"
@@ -57,9 +58,13 @@ func PersistenceCache() error {
 }
 
 func createIndex(repo string) error {
+	var loc, _ = time.LoadLocation("Asia/Shanghai")
+
 	namespace := fmt.Sprintf("%s/%s", cli.YuQue.User, repo)
 	docs, _ := cli.ListRepoDoc(namespace)
 	for _, doc := range docs.Data {
+		doc.UpdatedAt = doc.UpdatedAt.In(loc)
+		doc.CreatedAt = doc.CreatedAt.In(loc)
 		detail, err := cli.Client().Doc.Get(namespace, doc.Slug, &yuqueg.DocGet{Raw: 1})
 		if err != nil {
 			return err
@@ -113,6 +118,7 @@ func client() *Config {
 }
 
 func main() {
+
 	if cli.Manage.Theme == "" {
 		cli.Manage.Theme = "default"
 	}

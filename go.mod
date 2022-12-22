@@ -8,5 +8,6 @@ require (
 	github.com/yanyiwu/gojieba v1.1.2
 	golang.org/x/crypto v0.0.0-20210513164829-c07d793c2f9a
 	golang.org/x/net v0.0.0-20210226172049-e18ecbb05110
+	golang.org/x/sys v0.3.0 // indirect
 	gopkg.in/yaml.v2 v2.2.8
 )

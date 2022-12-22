@@ -22,7 +22,7 @@ type Blog struct {
 	Description string  `yaml:"description"`
 	Author      string  `yaml:"author"`
 	Vssue       Vssue   `yaml:"vssue"`
-	Link        []Links `yaml:"link"`
+	Link        []Links `yaml:"links"`
 }
 
 type Links struct {

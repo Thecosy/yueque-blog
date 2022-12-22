@@ -2,10 +2,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/wujiyu115/yuqueg"
-	"gopkg.in/yaml.v2"
 	"os"
 	"strings"
+
+	"time"
+
+	"github.com/wujiyu115/yuqueg"
+	"gopkg.in/yaml.v2"
 )
 
 func ReadYamlConfig(path string) (*Config, error) {
@@ -33,6 +36,9 @@ func (y Config) ListRepoDoc(namespace string) (yuqueg.BookDetail, error) {
 }
 
 func (y Config) GenerateCache(doc yuqueg.DocDetail, namespace string) *DocDesc {
+	var loc, _ = time.LoadLocation("Asia/Shanghai")
+	doc.Data.UpdatedAt = doc.Data.UpdatedAt.In(loc)
+	doc.Data.CreatedAt = doc.Data.CreatedAt.In(loc)
 	return &DocDesc{
 		Name:        doc.Data.Title,
 		Description: doc.Data.Description,
@@ -45,6 +51,8 @@ func (y Config) GenerateCache(doc yuqueg.DocDetail, namespace string) *DocDesc {
 }
 
 func (y Config) GetDoc(namespace, slug string) (*DocDesc, error) {
+	var loc, _ = time.LoadLocation("Asia/Shanghai")
+
 	var doc yuqueg.DocDetail
 	docs, err := y.ListRepoDoc(namespace)
 	if err != nil {
@@ -53,6 +61,9 @@ func (y Config) GetDoc(namespace, slug string) (*DocDesc, error) {
 	for _, v := range docs.Data {
 		data, ok := Cache[slug]
 		if ok && v.Slug == slug && v.UpdatedAt == data.UpdatedAt {
+			//fmt.Println("cache hit", data)
+			data.UpdatedAt = data.UpdatedAt.In(loc)
+			data.CreatedAt = data.CreatedAt.In(loc)
 			return data, nil
 		}
 	}

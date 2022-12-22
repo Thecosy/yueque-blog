@@ -9,6 +9,7 @@ import (
 	"net/http/httputil"
 	"net/url"
 	"strings"
+	"time"
 )
 
 func (y Config) ServeHTTP(uri string, w http.ResponseWriter, r *http.Request) {
@@ -39,6 +40,8 @@ func (y Config) GetRepos(g *gin.Context) {
 }
 
 func (y Config) DocList(g *gin.Context) {
+	var loc, _ = time.LoadLocation("Asia/Shanghai")
+
 	repo := g.Param("repo")
 	detail, err := y.ListRepoDoc(fmt.Sprintf("%s/%s", y.YuQue.User, repo))
 	if err != nil {
@@ -47,6 +50,8 @@ func (y Config) DocList(g *gin.Context) {
 	}
 	var docs []yuqueg.DocBookDetail
 	for _, v := range detail.Data {
+		v.UpdatedAt = v.UpdatedAt.In(loc)
+		v.CreatedAt = v.CreatedAt.In(loc)
 		docs = append(docs, v)
 	}
 	detail.Data = docs
@@ -110,6 +115,7 @@ func (y Config) SearchDoc(g *gin.Context) {
 			CreatedAt:   Cache[v].CreatedAt,
 			Url:         fmt.Sprintf("//%s/%s/%s", g.Request.Host, strings.Split(Cache[v].Namespace, "/")[1], Cache[v].Slug),
 		}
+
 		result = append(result, item)
 	}
 	g.JSON(200, gin.H{

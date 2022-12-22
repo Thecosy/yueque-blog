@@ -236,13 +236,10 @@
                 <div class="fg"></div>
             </div>
             <div class="meBox-text">
-                <p>大道至简, 故不繁</p>
-                <p>知行合一, 故不辍</p>
-                <p>守正出奇, 故不忧</p>
-                <p>道生一，一生二，二生三，三生万物</p>
+                <p>程序从来都不是完美的，但请对那些追求完美的程序员（自己）保持着敬畏。</p>
                 <div class="meBox-Button">
                     <a href="/" target="_blank"><i class="bi bi-house-door-fill"></i></a>
-                    <a href="https://github.com/lllwan" target="_blank"><i class="bi-github" role="img" aria-label="GitHub"></i></a>
+                    <a href="https://github.com/Thecosy" target="_blank"><i class="bi-github" role="img" aria-label="GitHub"></i></a>
                 </div>
             </div>
             <div class="drawer">
@@ -272,7 +269,7 @@
             <div class="cmdText">
                 <div style="padding-right: 20px;" id="write">
                     {{ .doc }}
-                    <p style="color: darkgray;font-size: small">创建于：{{ .detail.CreatedAt }}</p>
+                    <p style="color: darkgray;font-size: small">创建于：{{ .detail.CreatedAt.Format "2006,01 02 15:04" }}</p>
                 </div>
             </div>
         </div>
