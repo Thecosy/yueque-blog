@@ -41,7 +41,7 @@
     <!-- 伪终端介绍 -->
     <div id="cmdBox">
 
-        <div :id="moveInfo2.dragId"   style="background: rgba(255, 255, 255, 0);
+        <div :id="moveInfo2.dragId" style="background: rgba(255, 255, 255, 0);
     position: absolute;" :style="
         'width:' +
         moveInfo2.width +
@@ -53,50 +53,50 @@
         moveInfo2.height +
         'px'
       ">
-        <!-- 第一个终端 -->
-        <div class="cmd">
-            <!-- 三个按钮 -->
-            <div @mousedown.stop="dragDiv2($event)" @mouseup.stop="clearEvent($event)"
-                 style="cursor: move;   user-select:none;">
+            <!-- 第一个终端 -->
+            <div class="cmd">
+                <!-- 三个按钮 -->
+                <div @mousedown.stop="dragDiv2($event)" @mouseup.stop="clearEvent($event)"
+                     style="cursor: move;   user-select:none;">
 
-            <div class="click">
-                <div class="red"></div>
-                <div class="yellow"></div>
-                <div class="green"></div>
+                    <div class="click">
+                        <div class="red"></div>
+                        <div class="yellow"></div>
+                        <div class="green"></div>
+                    </div>
+                    <!-- 顶部标题 -->
+                    <div class="title">
+                        <span>Linux - bash</span>
+                    </div>
+                </div>
+                <!-- 终端内文字 -->
+                <div class="cmdText">
+                    <!--                <span style="color: rgb(0, 190, 0);">root@Linux</span>-->
+                    <!--                <span style="color: blue;">~</span>-->
+                    <!--                <span style="color: rgb(39, 39, 39);">./tianqi.sh</span>-->
+                    <!--                <br />-->
+                    <!--                <iframe scrolling="no" src="https://tianqiapi.com/api.php?style=tc&skin=pitaya" frameborder="0"-->
+                    <!--                        width="350" height="24" allowtransparency="true"></iframe>-->
+                    <!--                <br />-->
+                    <span style="color: rgb(0, 190, 0);">root@Linux</span>
+                    <span style="color: blue;">~</span>
+                    <span style="color: rgb(39, 39, 39);">cat /me.txt</span>
+                    <ul style="margin-left: 15px">
+                        <li>Java and Python/Golang 开发程序猿一枚</li>
+                        <li>略懂前端，伪全栈</li>
+                        <li>热衷于折腾kubernetes、云原生、service mesh、网络、存储等脱发技术</li>
+                        <li>资深电子垃圾堆建设者，热爱树莓派、各种矿渣和传感器, 智能家居的业余玩家</li>
+                        <li>编程劝退师，背锅10年，仍愿永不宕机，世界和平</li>
+                    </ul>
+                    <span style="color: rgb(0, 190, 0);">root@Linux</span>
+                    <span style="color: blue;">~</span>
+                </div>
             </div>
-            <!-- 顶部标题 -->
-            <div class="title">
-                <span>Linux - bash</span>
-            </div>
-            </div>
-            <!-- 终端内文字 -->
-            <div class="cmdText">
-                <!--                <span style="color: rgb(0, 190, 0);">root@Linux</span>-->
-                <!--                <span style="color: blue;">~</span>-->
-                <!--                <span style="color: rgb(39, 39, 39);">./tianqi.sh</span>-->
-                <!--                <br />-->
-                <!--                <iframe scrolling="no" src="https://tianqiapi.com/api.php?style=tc&skin=pitaya" frameborder="0"-->
-                <!--                        width="350" height="24" allowtransparency="true"></iframe>-->
-                <!--                <br />-->
-                <span style="color: rgb(0, 190, 0);">root@Linux</span>
-                <span style="color: blue;">~</span>
-                <span style="color: rgb(39, 39, 39);">cat /me.txt</span>
-                <ul style="margin-left: 15px">
-                    <li>Java and Python/Golang 开发程序猿一枚</li>
-                    <li>略懂前端，伪全栈</li>
-                    <li>热衷于折腾kubernetes、云原生、service mesh、网络、存储等脱发技术</li>
-                    <li>资深电子垃圾堆建设者，热爱树莓派、各种矿渣和传感器, 智能家居的业余玩家</li>
-                    <li>编程劝退师，背锅10年，仍愿永不宕机，世界和平</li>
-                </ul>
-                <span style="color: rgb(0, 190, 0);">root@Linux</span>
-                <span style="color: blue;">~</span>
-            </div>
-        </div>
         </div>
         <!-- 第二个终端 -->
 
 
-                    <div :id="moveInfo.dragId"   style="background: rgba(255, 255, 255, 0);
+        <div :id="moveInfo.dragId" style="background: rgba(255, 255, 255, 0);
     position: absolute;" :style="
         'width:' +
         moveInfo.width +
@@ -109,68 +109,69 @@
         'px'
       ">
 
-                    <!-- 拖拽图标 -->
-                    <div class="cmd " >
+            <!-- 拖拽图标 -->
+            <div class="cmd cmd2">
 
 
-                        <!-- 三个按钮 -->
-                        <div @mousedown.stop="dragDiv1($event)" @mouseup.stop="clearEvent($event)"
-                             style="cursor: move;   user-select:none;">
-                            <div class="click">
-                                <div class="red"></div>
-                                <div class="yellow"></div>
-                                <div class="green"></div>
-                            </div>
-                            <!-- 顶部标题 -->
-                            <div class="title">
-                                <span>blog - bash</span>
-                            </div>
-                        </div>
-
-                        <!-- 终端内文字 -->
-                        <div class="cmdText">
-                            <span style="color: rgb(0, 190, 0);">root@Linux</span>
-                            <span style="color: blue;">~</span>
-                            <span style="color: rgb(39, 39, 39);">./docs.sh</span>
-                            <ul class="ul">
-                                {{range $i, $v := .repos}}
-                                <li><a href="/DocList/{{ $v.Repo }}">{{ $v.Name }}</a></li>
-                                {{end}}
-                            </ul>
-                            <span style="color: rgb(0, 190, 0);">root@Linux</span>
-                            <span style="color: blue;">~</span>
-                            <span style="color: rgb(39, 39, 39);">./links.sh</span>
-                            <ul class="ul">
-                                {{range $i, $v := .blog.Link}}
-                                <li><a href="{{ $v.Link }}" target="_blank">{{ $v.Name }}</a></li>
-                                {{end}}
-                            </ul>
-                            <span style="color: rgb(0, 190, 0);">root@Linux</span>
-                            <span style="color: blue;">~</span>
-                            <span style="color: rgb(39, 39, 39);">
-                  <input id="inputId" @keyup.enter="nextCode(temp)" v-model="temp.input" type=text
-                         style="border-style:none;outline:none;font-size: 14px;background-color:rgba(0,0,0,0);">
-                </span>
-                            <div v-for="(item,index) in createNumber" :key="index">
-                                <!--                    <span style="color: rgb(0, 190, 0);">root@Linux</span>-->
-                                <!--                    <span style="color: blue;">~</span>-->
-                                <span v-text="item.text" style="color: rgb(39, 39, 39);">
-
-                  </span>
-                                <ul class="ul">
-
-                                </ul>
-                                <!-- ------ -->
-                                <span style="color: rgb(0, 190, 0);">root@Linux</span>
-                                <span style="color: blue;">~</span>
-                                <span style="color: rgb(39, 39, 39);">
-                    <input :ref="'input'+ item.id " @keyup.enter="nextCode(item)" v-model="item.input" type=text
-                           style="border-style:none;outline:none;font-size: 14px;background-color:rgba(0,0,0,0); ">
-                  </span>
-                            </div>
-                        </div>
+                <!-- 三个按钮 -->
+                <div @mousedown.stop="dragDiv1($event)" @mouseup.stop="clearEvent($event)"
+                     style="cursor: move;   user-select:none;">
+                    <div class="click">
+                        <div class="red"></div>
+                        <div class="yellow"></div>
+                        <div class="green"></div>
+                    </div>
+                    <!-- 顶部标题 -->
+                    <div class="title">
+                        <span>blog - bash</span>
                     </div>
                 </div>
+
+                <!-- 终端内文字 -->
+                <div class="cmdText">
+                    <span style="color: rgb(0, 190, 0);">root@Linux</span>
+                    <span style="color: blue;">~</span>
+                    <span style="color: rgb(39, 39, 39);">./docs.sh</span>
+                    <ul class="ul">
+                        {{range $i, $v := .repos}}
+                        <li><a href="/DocList/{{ $v.Repo }}">{{ $v.Name }}</a></li>
+                        {{end}}
+                    </ul>
+                    <span style="color: rgb(0, 190, 0);">root@Linux</span>
+                    <span style="color: blue;">~</span>
+                    <span style="color: rgb(39, 39, 39);">./links.sh</span>
+                    <ul class="ul">
+                        {{range $i, $v := .blog.Link}}
+                        <li><a href="{{ $v.Link }}" target="_blank">{{ $v.Name }}</a></li>
+                        {{end}}
+                    </ul>
+                    <span style="color: rgb(0, 190, 0);">root@Linux</span>
+                    <span style="color: blue;">~</span>
+                    <span style="color: rgb(39, 39, 39);">
+                            <input id="inputId" @keyup.enter="nextCode(temp)" v-model="temp.input" type=text
+                                   style="border-style:none;outline:none;font-size: 14px;background-color:rgba(0,0,0,0);">
+                        </span>
+                    <div v-for="(item,index) in createNumber" :key="index">
+                        <!--                    <span style="color: rgb(0, 190, 0);">root@Linux</span>-->
+                        <!--                    <span style="color: blue;">~</span>-->
+                        <span v-text="item.text" style="color: rgb(39, 39, 39);">
+
+                            </span>
+                        <ul class="ul">
+
+                        </ul>
+                        <!-- ------ -->
+                        <span style="color: rgb(0, 190, 0);">root@Linux</span>
+                        <span style="color: blue;">~</span>
+                        <span style="color: rgb(39, 39, 39);">
+                                <input :ref="'input'+ item.id " @keyup.enter="nextCode(item)" v-model="item.input"
+                                       type=text
+                                       style="border-style:none;outline:none;font-size: 14px;background-color:rgba(0,0,0,0); ">
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
     </div>

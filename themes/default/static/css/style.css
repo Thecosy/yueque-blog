@@ -312,9 +312,9 @@ body {
 }
 
 .cmd2 {
-    position: relative;
-    top: -280px;
-    left: 100px;
+    /*position: relative;*/
+    /*top: -280px;*/
+    /*left: 100px;*/
 }
 
 .cmd2 .cmdText .ul {
