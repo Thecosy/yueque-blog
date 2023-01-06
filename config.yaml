@@ -13,12 +13,12 @@ yuque:
     - name: "Linux"
       repo: "cwb37r"   
 blog:
-  title: "Thecosy"
+  title: "Thecosy Tech"
   subtitle: "大道至简"
   keywords: "页面keywords"
   avatar: "https://img2.baidu.com/it/u=2015865969,3401990894&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1671642000&t=5ec3f0711e9d16b2c698d8df10092bf0"
   description: "页面description"
-  author: "Thecosy"
+  author: "Thecosy Tech"
   # 友情链接
   links:
       - name: "google"

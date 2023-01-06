@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,10 +10,10 @@
     <meta name="keywords" content="{{ .blog.Keywords }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../static/css/style.css">
-    
+
     <!-- 引入vue -->
-	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-	<!-- 引入http-vue-loader -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <!-- 引入http-vue-loader -->
     <script src="https://unpkg.com/http-vue-loader"></script>
 </head>
 
@@ -34,15 +33,32 @@
         </div>
         <!-- 两个按钮 -->
         <div class="meBox-Button">
-            <a href="https://github.com/Thecosy" target="_blank"><i class="bi-github" role="img" aria-label="GitHub"></i></a>
+            <a href="https://github.com/Thecosy" target="_blank"><i class="bi-github" role="img"
+                                                                    aria-label="GitHub"></i></a>
         </div>
     </div>
 
     <!-- 伪终端介绍 -->
     <div id="cmdBox">
+
+        <div :id="moveInfo2.dragId"   style="background: rgba(255, 255, 255, 0);
+    position: absolute;" :style="
+        'width:' +
+        moveInfo2.width +
+        'px; left:' +
+        moveInfo2.coordinate.x +
+        'px; top:' +
+        moveInfo2.coordinate.y +
+        'px; height:' +
+        moveInfo2.height +
+        'px'
+      ">
         <!-- 第一个终端 -->
         <div class="cmd">
             <!-- 三个按钮 -->
+            <div @mousedown.stop="dragDiv2($event)" @mouseup.stop="clearEvent($event)"
+                 style="cursor: move;   user-select:none;">
+
             <div class="click">
                 <div class="red"></div>
                 <div class="yellow"></div>
@@ -52,15 +68,16 @@
             <div class="title">
                 <span>Linux - bash</span>
             </div>
+            </div>
             <!-- 终端内文字 -->
             <div class="cmdText">
-<!--                <span style="color: rgb(0, 190, 0);">root@Linux</span>-->
-<!--                <span style="color: blue;">~</span>-->
-<!--                <span style="color: rgb(39, 39, 39);">./tianqi.sh</span>-->
-<!--                <br />-->
-<!--                <iframe scrolling="no" src="https://tianqiapi.com/api.php?style=tc&skin=pitaya" frameborder="0"-->
-<!--                        width="350" height="24" allowtransparency="true"></iframe>-->
-<!--                <br />-->
+                <!--                <span style="color: rgb(0, 190, 0);">root@Linux</span>-->
+                <!--                <span style="color: blue;">~</span>-->
+                <!--                <span style="color: rgb(39, 39, 39);">./tianqi.sh</span>-->
+                <!--                <br />-->
+                <!--                <iframe scrolling="no" src="https://tianqiapi.com/api.php?style=tc&skin=pitaya" frameborder="0"-->
+                <!--                        width="350" height="24" allowtransparency="true"></iframe>-->
+                <!--                <br />-->
                 <span style="color: rgb(0, 190, 0);">root@Linux</span>
                 <span style="color: blue;">~</span>
                 <span style="color: rgb(39, 39, 39);">cat /me.txt</span>
@@ -75,66 +92,118 @@
                 <span style="color: blue;">~</span>
             </div>
         </div>
-        <!-- 第二个终端 -->
-        <div class="cmd cmd2">
-            <!-- 三个按钮 -->
-            <div class="click">
-                <div class="red"></div>
-                <div class="yellow"></div>
-                <div class="green"></div>
-            </div>
-            <!-- 顶部标题 -->
-            <div class="title">
-                <span>blog - bash</span>
-            </div>
-            <!-- 终端内文字 -->
-            <div class="cmdText">
-                <span style="color: rgb(0, 190, 0);">root@Linux</span>
-                <span style="color: blue;">~</span>
-                <span style="color: rgb(39, 39, 39);">./docs.sh</span>
-                <ul class="ul">
-                    {{range $i, $v := .repos}}
-                    <li><a href="/DocList/{{ $v.Repo }}">{{ $v.Name }}</a></li>
-                    {{end}}
-                </ul>
-                <span style="color: rgb(0, 190, 0);">root@Linux</span>
-                <span style="color: blue;">~</span>
-                <span style="color: rgb(39, 39, 39);">./links.sh</span>
-                <ul class="ul">
-                    {{range $i, $v := .blog.Link}}
-                    <li><a href="{{ $v.Link }}" target="_blank">{{ $v.Name }}</a></li>
-                    {{end}}
-                </ul>
-                <span style="color: rgb(0, 190, 0);">root@Linux</span>
-                    <span style="color: blue;">~</span>
-                    <span style="color: rgb(39, 39, 39);">
-                        <input id="inputId"   @keyup.enter="nextCode(temp)" v-model="temp.input" type=text style="border-style:none;outline:none;font-size: 14px;background-color:rgba(0,0,0,0);">
-                    </span>
-                <div  v-for="(item,index) in createNumber" :key="index">
-<!--                    <span style="color: rgb(0, 190, 0);">root@Linux</span>-->
-<!--                    <span style="color: blue;">~</span>-->
-                    <span v-text="item.text" style="color: rgb(39, 39, 39);">
-                        
-                    </span>
-                    <ul class="ul">
-                      
-                    </ul>
-                    <!-- ------ -->
-                    <span style="color: rgb(0, 190, 0);">root@Linux</span>
-                    <span style="color: blue;">~</span>
-                    <span style="color: rgb(39, 39, 39);">
-                        <input :ref="'input'+ item.id " @keyup.enter="nextCode(item)" v-model="item.input" type=text style="border-style:none;outline:none;font-size: 14px;background-color:rgba(0,0,0,0); ">
-                    </span>
-                </div>
-            </div>
         </div>
+        <!-- 第二个终端 -->
+
+
+                    <div :id="moveInfo.dragId"   style="background: rgba(255, 255, 255, 0);
+    position: absolute;" :style="
+        'width:' +
+        moveInfo.width +
+        'px; left:' +
+        moveInfo.coordinate.x +
+        'px; top:' +
+        moveInfo.coordinate.y +
+        'px; height:' +
+        moveInfo.height +
+        'px'
+      ">
+
+                    <!-- 拖拽图标 -->
+                    <div class="cmd " >
+
+
+                        <!-- 三个按钮 -->
+                        <div @mousedown.stop="dragDiv1($event)" @mouseup.stop="clearEvent($event)"
+                             style="cursor: move;   user-select:none;">
+                            <div class="click">
+                                <div class="red"></div>
+                                <div class="yellow"></div>
+                                <div class="green"></div>
+                            </div>
+                            <!-- 顶部标题 -->
+                            <div class="title">
+                                <span>blog - bash</span>
+                            </div>
+                        </div>
+
+                        <!-- 终端内文字 -->
+                        <div class="cmdText">
+                            <span style="color: rgb(0, 190, 0);">root@Linux</span>
+                            <span style="color: blue;">~</span>
+                            <span style="color: rgb(39, 39, 39);">./docs.sh</span>
+                            <ul class="ul">
+                                {{range $i, $v := .repos}}
+                                <li><a href="/DocList/{{ $v.Repo }}">{{ $v.Name }}</a></li>
+                                {{end}}
+                            </ul>
+                            <span style="color: rgb(0, 190, 0);">root@Linux</span>
+                            <span style="color: blue;">~</span>
+                            <span style="color: rgb(39, 39, 39);">./links.sh</span>
+                            <ul class="ul">
+                                {{range $i, $v := .blog.Link}}
+                                <li><a href="{{ $v.Link }}" target="_blank">{{ $v.Name }}</a></li>
+                                {{end}}
+                            </ul>
+                            <span style="color: rgb(0, 190, 0);">root@Linux</span>
+                            <span style="color: blue;">~</span>
+                            <span style="color: rgb(39, 39, 39);">
+                  <input id="inputId" @keyup.enter="nextCode(temp)" v-model="temp.input" type=text
+                         style="border-style:none;outline:none;font-size: 14px;background-color:rgba(0,0,0,0);">
+                </span>
+                            <div v-for="(item,index) in createNumber" :key="index">
+                                <!--                    <span style="color: rgb(0, 190, 0);">root@Linux</span>-->
+                                <!--                    <span style="color: blue;">~</span>-->
+                                <span v-text="item.text" style="color: rgb(39, 39, 39);">
+
+                  </span>
+                                <ul class="ul">
+
+                                </ul>
+                                <!-- ------ -->
+                                <span style="color: rgb(0, 190, 0);">root@Linux</span>
+                                <span style="color: blue;">~</span>
+                                <span style="color: rgb(39, 39, 39);">
+                    <input :ref="'input'+ item.id " @keyup.enter="nextCode(item)" v-model="item.input" type=text
+                           style="border-style:none;outline:none;font-size: 14px;background-color:rgba(0,0,0,0); ">
+                  </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
     </div>
 </div>
 <script>
-    Vue.use(httpVueLoader)  
+    Vue.use(httpVueLoader)
     new Vue({
-        el: '#box',  
-        data: {  
+        el: '#box',
+        data: {
+            moveInfo: {
+                dragId: "smallDragBoxId",
+                moveId: "smallMoveBoxId",
+                text: "我是拖动的小盒子",
+                width: 600,
+                height: 400,
+                // 上边距和左边距
+                coordinate: {
+                    x: 560,
+                    y: 180,
+                },
+            },
+            moveInfo2: {
+                dragId: "smallDragBoxId2",
+                moveId: "smallMoveBoxId",
+                text: "我是拖动的小盒子",
+                width: 300,
+                height: 200,
+                // 上边距和左边距
+                coordinate: {
+                    x: 460,
+                    y: 80,
+                },
+            },
             temp: {
                 id: 0,
                 default: 0,
@@ -148,15 +217,153 @@
             //     input: ""
             // }],
             createNumber: [],
-        },  
+        },
         created() {
         },
-        mounted () { 
+        mounted() {
             document.getElementById('inputId').focus()
         },
         methods: {
+            // 区块拖动
+            dragDiv1(el, index) {
+                // dragId: 可拖动区域唯一标识
+                // moveId: 改变宽度组件唯一标识
+                const { dragId, coordinate } = this.moveInfo;
+                let obig = document.getElementById("box");
+                let osmall = document.getElementById(dragId);
+                // 用于保存小的div拖拽前的坐标
+                osmall.startX = el.clientX - osmall.offsetLeft;
+                osmall.startY = el.clientY - osmall.offsetTop;
+                document.onmousemove = (e) => {
+                    let left, top;
+                    left = e.clientX - osmall.startX;
+                    top = e.clientY - osmall.startY;
+                    osmall.style.left = left + "px";
+                    osmall.style.top = top + "px";
+                    coordinate.x = left;
+                    coordinate.y = top;
+                    //判断是否超屏幕边缘
+                    if (left <= 0) {
+                        osmall.style.left = 0 + "px";
+                        coordinate.x = 0;
+                    }
+                    if (top <= 0) {
+                        osmall.style.top = 0 + "px";
+                        coordinate.y = 0;
+                    }
+                    if (left >= obig.offsetWidth - osmall.offsetWidth) {
+                        osmall.style.left = obig.offsetWidth - osmall.offsetWidth + "px";
+                        coordinate.x = obig.offsetWidth - osmall.offsetWidth;
+                    }
+                    // if (top >= obig.offsetHeight - osmall.offsetHeight) {
+                    //     osmall.style.top = obig.offsetHeight - osmall.offsetHeight + "px";
+                    //     coordinate.y = obig.offsetHeight - osmall.offsetHeight;
+                    // }
+                };
+            },
+            // 区块拖动2
+            dragDiv2(el, index) {
+                // dragId: 可拖动区域唯一标识
+                // moveId: 改变宽度组件唯一标识
+                const { dragId, coordinate } = this.moveInfo2;
+                let obig = document.getElementById("box");
+                let osmall = document.getElementById(dragId);
+                // 用于保存小的div拖拽前的坐标
+                osmall.startX = el.clientX - osmall.offsetLeft;
+                osmall.startY = el.clientY - osmall.offsetTop;
+                document.onmousemove = (e) => {
+                    let left, top;
+                    left = e.clientX - osmall.startX;
+                    top = e.clientY - osmall.startY;
+                    osmall.style.left = left + "px";
+                    osmall.style.top = top + "px";
+                    coordinate.x = left;
+                    coordinate.y = top;
+                    //判断是否超屏幕边缘
+                    if (left <= 0) {
+                        osmall.style.left = 0 + "px";
+                        coordinate.x = 0;
+                    }
+                    if (top <= 0) {
+                        osmall.style.top = 0 + "px";
+                        coordinate.y = 0;
+                    }
+                    if (left >= obig.offsetWidth - osmall.offsetWidth) {
+                        osmall.style.left = obig.offsetWidth - osmall.offsetWidth + "px";
+                        coordinate.x = obig.offsetWidth - osmall.offsetWidth;
+                    }
+                    // if (top >= obig.offsetHeight - osmall.offsetHeight) {
+                    //     osmall.style.top = obig.offsetHeight - osmall.offsetHeight + "px";
+                    //     coordinate.y = obig.offsetHeight - osmall.offsetHeight;
+                    // }
+                };
+            },
+            // 改变drag宽度尺寸
+            changeWidth(params) {
+                const { index, width } = params;
+                let left;
+                const { dragId } = this.moveInfo;
+                // let obig = document.getElementById('box')
+
+                let osmall = document.getElementById(dragId);
+                let boxWidth = document.getElementById("box").offsetWidth;
+                left = osmall.style.left;
+                const newWidth = this.moveInfo.width + width;
+                // outWidth拖动宽度时超出box的宽度
+                const outWidth =
+                    Number(left.slice(0, left.length - 2)) +
+                    Number(newWidth) -
+                    Number(boxWidth);
+                // 如果超出box将截取留下的
+                if (outWidth >= 0) {
+                    this.moveInfo.width =
+                        Number(boxWidth) - Number(left.slice(0, left.length - 2));
+                } else {
+                    this.moveInfo.width = newWidth;
+                }
+                // 设置div的最小宽度和最大宽度
+                if (this.moveInfo.width < 600) {
+                    this.moveInfo.width = 600;
+                }
+                if (this.moveInfo.width > 900) {
+                    this.moveInfo.width = 900;
+                }
+            },
+            // 改变drag高度
+            heightChange(params) {
+                const { index, height } = params;
+                let top;
+                let osmall = document.getElementById(this.moveInfo.dragId);
+                let boxHeight = document.getElementById("box").offsetHeight;
+                top = osmall.style.top;
+                const newHeight = this.moveInfo.height + height;
+                // outHeight拖动宽度时超出box的高度
+                const outHeight =
+                    Number(top.slice(0, top.length - 2)) +
+                    Number(newHeight) -
+                    Number(boxHeight);
+                // 如果超出box将截取留下的
+                if (outHeight >= 0) {
+                    this.moveInfo.height =
+                        Number(boxHeight) - Number(top.slice(0, top.length - 2));
+                } else {
+                    this.moveInfo.height = newHeight;
+                }
+                // 设置div的最小宽度和最大宽度
+                if (this.moveInfo.height < 100) {
+                    this.moveInfo.height = 100;
+                }
+                if (this.moveInfo.height > 200) {
+                    this.moveInfo.height = 200;
+                }
+            },
+            // 清除鼠标事件
+            clearEvent() {
+                document.onmousemove = null;
+                document.onmouseup = null;
+            },
             nextCode(item) {
-                if(item.input === "ls"){
+                if (item.input === "ls") {
                     this.createNumber.push({
                         id: item.id + 1,
                         default: 0,
@@ -166,34 +373,35 @@
                             "Library\t\t\t\n"
 
                     })
-                }else if(item.input === "pwd"){
+                } else if (item.input === "pwd") {
                     this.createNumber.push({
                         id: item.id + 1,
                         default: 0,
                         text: "/root/home"
                     })
-                }else if(item.input === "help"){
+                } else if (item.input === "help") {
                     this.createNumber.push({
                         id: item.id + 1,
                         default: 0,
                         text: "cd\t\t\t\tls\t\t\t\tpwd"
                     })
-                }else if(item.input == "" || item.input == undefined){
+                } else if (item.input == "" || item.input == undefined) {
                     this.createNumber.push({
                         id: item.id + 1,
                         default: 0,
                         text: "Please do not enter a blank line"
                     })
                 }
-                else{
-                this.createNumber.push({
-                    id: item.id + 1,
-                    default: 0,
-                    text: "zsh: command not found:" + item.input
-                })}
+                else {
+                    this.createNumber.push({
+                        id: item.id + 1,
+                        default: 0,
+                        text: "zsh: command not found:" + item.input
+                    })
+                }
                 //延时执行刷新移动到下一个input操作
                 setTimeout(() => {
-                    this.$refs['input'+(item.id + 1)][0].focus();
+                    this.$refs['input' + (item.id + 1)][0].focus();
                 }, 5);
             }
         },

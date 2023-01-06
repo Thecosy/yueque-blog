@@ -305,6 +305,12 @@ body {
     padding-left: 15px;
 }
 
+.cmdText-Doc {
+    overflow-y: auto;
+    padding-top: 10px;
+    padding-left: 15px;
+}
+
 .cmd2 {
     position: relative;
     top: -280px;
@@ -471,7 +477,7 @@ body {
 }
 
 .cover {
-    width: 27%;
+    width: 33%;
     height: 163px;
 }
 
